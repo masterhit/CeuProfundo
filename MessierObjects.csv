@@ -1,0 +1,111 @@
+ObjectNum,Name,Type,Constellation,RAHour,RAMinute,DecSign,DecDeg,DecMinute,Magnitude,Info,AlphaLabel,Distance (ly),Label
+1,NGC 1952 Crab Nebula,Supernova Remnant,Taurus,5,34.5,+,22,1,8.4,Size: 6.0x4.0,1,6.300,M1
+2,NGC 7089,Globular Cluster,Aquarius,21,33.5,-,0,49,6.5,Size: 12.9,1,37.500,M2
+3,NGC 5272,Globular Cluster,Canes Venatici,13,42.2,+,28,23,6.2,Size: 16.2,1,33.900,M3
+4,NGC 6121,Globular Cluster,Scorpius,16,23.6,-,26,32,5.6,Size: 26.3,1,7.200,M4
+5,NGC 5904,Globular Cluster,Serpens Caput,15,18.6,+,2,5,5.6,Size: 17.4,1,24.500,M5
+6,NGC 6405 Butterfly Cluster,Open Cluster,Scorpius,17,40.1,-,32,13,5.3,Size: 25,1,2.000,M6
+7,NGC 6475 Ptolemy¹s Cluster,Open Cluster,Scorpius,17,53.9,-,34,49,4.1,Size: 80,1,800,M7
+8,NGC 6523 Lagoon Nebula,Diffuse Nebula,Sagittarius,18,3.8,-,24,23,6,Size: 90x40,1,5.200,M8
+9,NGC 6333,Globular Cluster,Ophiucus,17,19.2,-,18,31,7.7,Size: 9.3,1,26.700,M9
+10,NGC 6254,Globular Cluster,Ophiucus,16,57.1,-,4,6,6.6,Size: 15.1,1,14.400,M10
+11,NGC 6705 Wild Duck Cluster,Open Cluster,Scutum,18,51.1,-,6,16,6.3,Size: 14,1,6.000,M11
+12,NGC 6218,Globular Cluster,Ophiucus,16,47.2,-,1,57,6.7,Size: 14.5,1,16.000,M12
+13,NGC 6205 Hercules Globular Cluster,Globular Cluster,Hercules,16,41.7,+,36,28,5.8,Size: 16.6,1,22.800,M13
+14,NGC 6402,Globular Cluster,Ophiucus,17,37.6,-,3,15,7.6,Size: 11.7,1,27.400,M14
+15,NGC 7078,Globular Cluster,Pegasus,21,30,+,12,10,6.2,Size: 12.3,1,33.600,M15
+16,NGC 6611 Eagle Nebula Cluster,Open Cluster,Serpens Claudia,18,18.8,-,13,47,6.4,Size: 7,1,7.000,M16
+17,NGC 6618 Omega. Swan. Horseshoe Nebula,Diffuse Nebula,Sagittarius,18,20.8,-,16,11,7,Size: 11,1,5.000,M17
+18,NGC 6613,Open Cluster,Sagittarius,18,19.9,-,17,8,7.5,Size: 9,1,4.900,M18
+19,NGC 6273,Globular Cluster,Ophiucus,17,2.6,-,26,16,6.8,Size: 13.5,1,27.100,M19
+20,NGC 6514 Trifid Nebula,Diffuse Nebula,Sagittarius,18,2.3,-,23,2,9,Size: 28,1,5.200,M20/M21
+21,NGC 6531,Open Cluster,Sagittarius,18,4.6,-,22,30,6.5,Size: 13,0,4.250,M21
+22,NGC 6656,Globular Cluster,Sagittarius,18,36.4,-,23,54,5.1,Size: 24,1,10.100,M22
+23,NGC 6494,Open Cluster,Sagittarius,17,56.8,-,19,1,6.9,Size: 27,1,2.150,M23
+24,NGC 6603 Milky Way Patch,Star Cloud,Sagittarius,18,18.4,-,18,25,4.6,Size: 90,1,10.000,M24
+25,IC 4725,Open Cluster,Sagittarius,18,31.7,-,19,14,6.5,Size: 40,1,2.000,M25
+26,NGC 6694,Open Cluster,Scutum,18,45.2,-,9,24,8,Size: 15,1,5.000,M26
+27,NGC 6853 Dumbbell Nebula,Planetary Nebula,Vulpecula,19,59.6,+,22,43,7.4,Size: 8.0x5.7,1,1.250,M27
+28,NGC 6626,Globular Cluster,Sagittarius,18,24.5,-,24,52,6.8,Size: 11.2,1,17.900,M28
+29,NGC 6913,Open Cluster,Cygnus,20,23.9,+,38,32,7.1,Size: 7,1,4.000,M29
+30,NGC 7099,Globular Cluster,Capricornus,21,40.4,-,23,11,7.2,Size: 11,1,24.800,M30
+31,NGC 224 Andromeda Galaxy,Spiral Galaxy,Andromeda,0,42.7,+,41,16,3.4,Size: 178x63,1,2.900.000,M31
+32,NGC 221 Satellite of M31,Elliptical Galaxy,Andromeda,0,42.7,+,40,52,8.1,Size: 8x6,0,2.900.000,
+33,NGC 598 Triangulum/Pinwheel Galaxy,Spiral Galaxy,Triangulum,1,33.9,+,30,39,5.7,Size: 73x45,1,3.000.000,M33
+34,NGC 1039,Open Cluster,Perseus,2,42,+,42,47,5.5,Size: 35,1,1.400,M34
+35,NGC 2168,Open Cluster,Gemini,6,8.9,+,24,20,5.3,Size: 28,1,2.800,M35
+36,NGC 1960,Open Cluster,Auriga,5,36.1,+,34,8,6.3,Size: 12,1,4.100,M36
+37,NGC 2099,Open Cluster,Auriga,5,52.4,+,32,33,6.2,Size: 24,1,4.400,M37
+38,NGC 1912,Open Cluster,Auriga,5,28.7,+,35,50,7.4,Size: 21,1,4.200,M38
+39,NGC 7092,Open Cluster,Cygnus,21,32.2,+,48,26,5.2,Size: 32,1,825,M39
+40,Winecke 4,Double Star,Ursa Major,12,22.2,+,58,5,9 & 9.3,Sep: 49 arcsec,1,510,M40
+41,NGC 2287,Open Cluster,Canis Major,6,47,-,20,44,4.6,Size: 38,1,2.300,M41
+42,NGC 1976 Great Orion Nebula,Diffuse Nebula,Orion,5,35.4,-,5,27,4,Size: 85x60,1,1.600,M42
+43,NGC 1982 de Mairan¹s Nebula,Diffuse Nebula,Orion,5,35.6,-,5,16,9,Size: 20x15,0,1.600,M43
+44,NGC 2632 Beehive Cluster (Praesepe),Open Cluster,Cancer,8,40.1,+,19,59,3.7,Size: 95,1,577,M44
+45,Pleiades. Subaru. Seven Sisters,Open Cluster,Taurus,3,47,+,24,7.2,1.6,Size: 110,1,380,M45
+46,NGC 2437,Open Cluster,Puppis,7,41.8,-,14,49,6,Size: 27,1,5.400,M46
+47,NGC 2422,Open Cluster,Puppis,7,36.6,-,14,30,5.2,Size: 30,1,1.600,M47
+48,NGC 2548,Open Cluster,Hydra,8,13.8,-,5,48,5.5,Size: 54,1,1.500,M48
+49,NGC 4472,Elliptical Galaxy,Virgo,12,29.8,+,8,0,8.4,Size: 9x7.5,1,60.000.000,M49
+50,NGC 2323,Open Cluster,Monocerus,7,3.2,-,8,20,6.3,Size: 16,1,3.000,M50
+51,NGC 5194 Whirlpool Galaxy,Spiral Galaxy,Canes Venatici,13,29.9,+,47,12,8.4,Size: 11x7,1,37.000.000,M51
+52,NGC 7654,Open Cluster,Cassiopeia,23,24.2,+,61,35,7.3,Size: 13,1,5.000,M52
+53,NGC 5024,Globular Cluster,Coma Berenices,13,12.9,+,18,10,7.6,Size: 12.6,1,56.400,M53
+54,NGC 6715,Globular Cluster,Sagittarius,18,55.1,-,30,29,7.6,Size: 9.1,1,82.800,M54
+55,NGC 6809,Globular Cluster,Sagittarius,19,40,-,30,58,6.3,Size: 19,1,16.600,M55
+56,NGC 6779,Globular Cluster,Lyra,19,16.6,+,30,11,8.3,Size: 7.1,1,31.600,M56
+57,NGC 6720 Ring Nebula,Planetary Nebula,Lyra,18,53.6,+,33,2,8.8,Size: 1.4x1,1,4.100,M57
+58,NGC 4579,Spiral Galaxy,Virgo,12,37.7,+,11,49,9.7,Size: 5.5x4.5,0,60.000.000,M58
+59,NGC 4621,Elliptical Galaxy,Virgo,12,42,+,11,39,9.6,Size: 5x3.5,0,60.000.000,M59
+60,NGC 4649,Elliptical Galaxy,Virgo,12,43.7,+,11,33,8.8,Size: 7x6,0,60.000.000,M60
+61,NGC 4303,Spiral Galaxy,Virgo,12,21.9,+,4,28,9.7,Size: 6x5.5,1,60.000.000,M61
+62,NGC 6266,Globular Cluster,Ophiucus,17,1.2,-,30,7,6.5,Size: 14.1,1,21.500,M62
+63,NGC 5055 Sunflower Galaxy,Spiral Galaxy,Canes Venatici,13,15.8,+,42,2,8.6,Size: 10x6,1,37.000.000,M63
+64,NGC 4826 Blackeye Galaxy,Spiral Galaxy,Coma Berenices,12,56.7,+,21,41,8.5,Size: 9.3x5.4,1,19.000.000,M64
+65,NGC 3623,Spiral Galaxy,Leo,11,18.9,+,13,5,9.3,Size: 8x1.5,0,35.000.000,M65
+66,NGC 3627,Spiral Galaxy,Leo,11,20.2,+,12,59,8.9,Size: 8x2.5,1,35.000.000,M65/M66
+67,NGC 2682,Open Cluster,Cancer,8,50.4,+,11,49,6.1,Size: 30,1,2.700,M67
+68,NGC 4590,Globular Cluster,Hydra,12,39.5,-,26,45,7.8,Size: 12,1,33.300,M68
+69,NGC 6637,Globular Cluster,Sagittarius,18,31.4,-,32,21,7.6,Size: 7.1,1,26.700,M69
+70,NGC 6681,Globular Cluster,Sagittarius,18,43.2,-,32,18,7.9,Size: 7.8,1,28.000,M70
+71,NGC 6838,Globular Cluster,Sagitta,19,53.8,+,18,47,8.3,Size: 7.2,1,11.700,M71
+72,NGC 6981,Globular Cluster,Aquarius,20,53.5,-,12,32,9.3,Size: 5.9,1,52.800,M72
+73,NGC 6994  Group of 4 stars,Group/Asterism,Aquarius,20,59,-,12,38,9,Size: 2.8,1,2.000,M73
+74,NGC 628,Spiral Galaxy,Pisces,1,36.7,+,15,47,9.4,Size: 10.2x9.5,1,35.000.000,M74
+75,NGC 6864,Globular Cluster,Sagittarius,20,6.1,-,21,55,8.5,Size: 6,1,57.700,M75
+76,NGC 650 Little Dumbell. Cork. Butterfly Nebula,Planetary Nebula,Perseus,1,42.3,+,51,34,10.1,Size: 2.7x1.8,1,3.400,M76
+77,NGC 1068 Cetus A,Spiral Galaxy,Cetus,2,42.7,+,0,1,8.9,Size: 7x6,1,60.000.000,M77
+78,NGC 2068,Diffuse Nebula,Orion,5,46.7,+,0,3,8.3,Size: 8x6,1,1.600,M78
+79,NGC 1904,Globular Cluster,Lepus,5,24.5,-,24,33,7.7,Size: 8.7,1,41.100,M79
+80,NGC 6093,Globular Cluster,Scorpius,16,17,-,22,59,7.3,Size: 8.9,1,27.400,M80
+81,NGC 3031 Bode¹s Galaxy,Spiral Galaxy,Ursa Major,9,55.6,+,69,4,6.9,Size: 21x10,1,12.000.000,M81
+82,NGC 3034 Cigar Galaxy,Irregular Galaxy,Ursa Major,9,55.8,+,69,41,8.4,Size: 9.x4,0,12.000.000,M82
+83,NGC 5236 Southern Pinwheel Galaxy,Spiral Galaxy,Hydra,13,37,-,29,52,7.6,Size: 11x10,1,15.000.000,M83
+84,NGC 4374,Lenticular (S0) Galaxy,Virgo,12,25.1,+,12,53,9.1,Size: 5,0,60.000.000,M84
+85,NGC 4382,Lenticular (S0) Galaxy,Coma Berenices,12,25.4,+,18,11,9.1,Size: 7.1x5.2,1,60.000.000,M85
+86,NGC 4406,Lenticular (S0) Galaxy,Virgo,12,26.2,+,12,57,8.9,Size: 7.5x5.5,0,60.000.000,M86
+87,NGC 4486 Virgo A,Elliptical Galaxy,Virgo,12,30.8,+,12,24,8.6,Size: 7,1,60.000.000,M87/M86
+88,NGC 4501,Spiral Galaxy,Coma Berenices,12,32,+,14,25,9.6,Size: 7x4,1,60.000.000,M88
+89,NGC 4552,Elliptical Galaxy,Virgo,12,35.7,+,12,33,9.8,Size: 4,0,60.000.000,M89
+90,NGC 4569,Spiral Galaxy,Virgo,12,36.8,+,13,10,9.5,Size: 9.5x4.5,0,60.000.000,M90
+91,NGC 4548,Spiral Galaxy,Coma Berenices,12,35.4,+,14,30,10.2,Size: 5.4x4.4,0,60.000.000,
+92,NGC 6341,Globular Cluster,Hercules,17,17.1,+,43,8,6.4,Size: 11.2,1,26.400,M92
+93,NGC 2447,Open Cluster,Puppis,7,44.6,-,23,52,6,Size: 22,1,3.600,M93
+94,NGC 4736,Spiral Galaxy,Canes Venatici,12,50.9,+,41,7,8.2,Size: 7x3,1,14.500.000,M94
+95,NGC 3351,Spiral Galaxy,Leo,10,44,+,11,42,9.7,Size: 4.4x3.3,0,38.000.000,M95
+96,NGC 3368,Spiral Galaxy,Leo,10,46.8,+,11,49,9.2,Size: 6x4,1,38.000.000,M96
+97,NGC 3587 Owl Nebula,Planetary Nebula,Ursa Major,11,14.8,+,55,1,9.9,Size: 3.4x3.3,1,2.600,M97
+98,NGC 4192,Spiral Galaxy,Coma Berenices,12,13.8,+,14,54,10.1,Size: 9.5x3.2,0,60.000.000,
+99,NGC 4254,Spiral Galaxy,Coma Berenices,12,18.8,+,14,25,9.9,Size: 5.4x4.8,0,60.000.000,
+100,NGC 4321,Spiral Galaxy,Coma Berenices,12,22.9,+,15,49,9.3,Size: 7x6,1,60.000.000,M100
+101,NGC 5457 Pinwheel Galaxy,Spiral Galaxy,Ursa Major,14,3.2,+,54,21,7.9,Size: 22,1,27.000.000,M10
+102,NGC 5866 Spindle Galaxy,Lenticular (S0) Galaxy,Draco,15,6.5,+,55,46,9.9,Size: 5.2x2.3,1,40.000.000,M102
+103,NGC 581,Open Cluster,Cassiopeia,1,33.2,+,60,42,7.4,Size: 6,1,8.000,M103
+104,NGC 4594 Sombrero Galaxy,Spiral Galaxy,Virgo,12,40,-,11,37,8,Size: 9x4,1,50.000.000,M104
+105,NGC 3379,Elliptical Galaxy,Leo,10,47.8,+,12,35,9.3,Size: 2,0,38.000.000,M105
+106,NGC 4258,Spiral Galaxy,Canes Venatici,12,19,+,47,18,8.4,Size: 19x8,1,25.000.000,M106
+107,NGC 6171,Globular Cluster,Ophiucus,16,32.5,-,13,3,7.9,Size: 10,1,19.600,M107
+108,NGC 3556,Spiral Galaxy,Ursa Major,11,11.5,+,55,40,10,Size: 8x1,0,45.000.000,M108
+109,NGC 3992,Spiral Galaxy,Ursa Major,11,57.6,+,53,23,9.8,Size: 7x4,1,55.000.000,M109
+110,NGC 205 Satellite of M31,Elliptical Galaxy,Andromeda,0,40.4,+,41,41,8.5,Size: 17x10,0,2.900.000,
