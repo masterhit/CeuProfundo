@@ -3724,7 +3724,7 @@ if polar_norte:
         RotuloCaldwellNorte()
     ###########################################################################
 
-    EcliticaPolarNorte()
+    EclipticaPolarNorte()
     GridPolar()
     GridDeclinacaoNorte()
 
