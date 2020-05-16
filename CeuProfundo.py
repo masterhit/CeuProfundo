@@ -97,14 +97,8 @@ ap.add_argument('-M', '--Messier', action='store_true',
                 help='Plota cartas com objetos Messier.')
 ap.add_argument('-C', '--Caldwell', action='store_true',
                 help='Plota cartas com objetos Caldwell.')
-ap.add_argument('-N', '--NGC', action='store_true',
-                help='Plota cartas com objetos NGC.')
-ap.add_argument('-I', '--IC', action='store_true',
-                help='Plota cartas com objetos Messier.')
 ap.add_argument('-D', '--Dark', action='store_true',
                 help='Usa fundo escuro.')
-ap.add_argument('-a', '--all', action='store_true',
-                help='Plota todas as cartas.')
 ap.add_argument('-r', '--retangular', action='store_true',
                 help='Plota carta retangular.')
 ap.add_argument('-s', '--sul', action='store_true',
@@ -113,8 +107,15 @@ ap.add_argument('-n', '--norte', action='store_true',
                 help='Plota carta polar norte.')
 ap.add_argument('-d', '--dupla', action='store_true',
                 help='Plota carta polar norte e sul.')
-ap.add_argument('-i', '--interativo', action='store_true',
-                help='Executa em modo interativo.')
+#ap.add_argument('-i', '--interativo', action='store_true',
+#                help='Executa em modo interativo.')
+#ap.add_argument('-a', '--all', action='store_true',
+#                help='Plota todas as cartas.')
+#ap.add_argument('-I', '--IC', action='store_true',
+#                help='Plota cartas com objetos do Index Catalog.')
+#ap.add_argument('-N', '--NGC', action='store_true',
+#                help='Plota cartas com objetos NGC.')
+
 args = ap.parse_args()
 
 
@@ -123,7 +124,6 @@ darkmode = args.Dark
 stars = args.Stars
 messier = args.Messier
 caldwell = args.Caldwell
-ngc = args.NGC
 ic = args.IC
 polar_sul = args.sul
 polar_norte = args.norte
@@ -440,10 +440,16 @@ def Line(StarA, StarB):
 
 
 def Coordenadas(RA, DEC):
-    #Conversao de Ascencao Reta para Radianos
-    RA_ajustado = RA * 2 * np.pi / 24
-    #Ajuste de Origem da declinacao (0 no equador, 90 no polo)
-    DEC_ajustado = 90 - abs(DEC)
+    if retangular:
+        #Conversao de Ascencao Reta para Radianos
+        RA_ajustado = RA
+        #Ajuste de Origem da declinacao (0 no equador, 90 no polo)
+        DEC_ajustado = DEC
+    else:
+        #Conversao de Ascencao Reta para Radianos
+        RA_ajustado = RA * 2 * np.pi / 24
+        #Ajuste de Origem da declinacao (0 no equador, 90 no polo)
+        DEC_ajustado = 90 - abs(DEC)
     return (RA_ajustado, DEC_ajustado)
 
 
@@ -3435,11 +3441,11 @@ def EclipticaRetangular():
     if retangular:
         RAecliptica = np.arange(0, 24, .1)  # EIXO X (ASCENCAO RETA)
         ecliptica = 23.5 * np.sin(RAecliptica * 2 * np.pi / 24)  # ECLIPTICA
-        plt.plot(RAecliptica, ecliptica, 'w--', alpha=0.4, zorder=2)
+        plt.plot(RAecliptica, ecliptica, 'b--', alpha=0.4, zorder=2)
     # FAIXA COM POSSIBILIDADE DE OCULTACAO PELA LUA
     if faixa_de_ocultacao:
-        plt.plot(RAecliptica, ecliptica + 5.3, 'w--', alpha=0.3, zorder=2)
-        plt.plot(RAecliptica, ecliptica - 5.3, 'w--', alpha=0.3, zorder=2)
+        plt.plot(RAecliptica, ecliptica + 5.3, 'b--', alpha=0.3, zorder=2)
+        plt.plot(RAecliptica, ecliptica - 5.3, 'b--', alpha=0.3, zorder=2)
 
 ###############################################################################
 
@@ -3607,7 +3613,8 @@ if retangular:
 
     # A funcao 'Cru()' plota o cruzeiro do sul em destaque.
     Cru()
-
+    LinesNorth()
+    LinesSouth()
     ###########################################################################
 
     ax.set_title("Carta Retangular | -" + str(declinacao_limite)
