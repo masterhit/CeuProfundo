@@ -163,7 +163,7 @@ plot_dpi = 250
 # PARAMETROS DE TAMANHO DO PLOT DAS ESTRELAS
 # magnitude=(plot_dpi/fator)*(base**-df.V)-limite
 base = 0.6 * np.e
-limite = 3.5
+limite = 4
 fator = 3
 star_alpha = 0.4
 alpha = star_background = 0.7
@@ -442,16 +442,17 @@ def Line(StarA, StarB):
     ax.add_artist(con)
 
 
+# AJUSTE/CONVERSAO DE COORDENADAS
 def Coordenadas(RA, DEC):
     if retangular:
-        #Conversao de Ascencao Reta para Radianos
+        #Nenhum ajuste em coordenadas retangulares: RA -> X
         RA_ajustado = RA
-        #Ajuste de Origem da declinacao (0 no equador, 90 no polo)
+        #Nenhum ajuste em coordenadas retangulares: DEC -> Y
         DEC_ajustado = DEC
     else:
-        #Conversao de Ascencao Reta para Radianos
+        #Conversao de Ascencao Reta para Radianos: RA -> theta
         RA_ajustado = RA * 2 * np.pi / 24
-        #Ajuste de Origem da declinacao (0 no equador, 90 no polo)
+        #Ajuste de Origem da declinacao (0 no equador, 90 no polo): DEC -> r
         DEC_ajustado = 90 - abs(DEC)
     return (RA_ajustado, DEC_ajustado)
 
@@ -3128,6 +3129,7 @@ def Vul():
 ###############################################################################
 
 
+#PLOTA AS LINHAS DAS CONSTELACOES NO HEMISFERIO SUL
 def LinesSouth():
     Ant()
     Apus()
@@ -3187,6 +3189,7 @@ def LinesSouth():
     Vol()
 
 
+#PLOTA AS LINHAS DAS CONSTELACOES NO HEMISFERIO NORTE
 def LinesNorth():
     And()
     Aql()
@@ -3230,6 +3233,8 @@ def LinesNorth():
 
 
 #%%
+###############################################################################
+##SIMBOLOS E ROTULOS DOS OBJETOS DE CEU PROFUNDO
 ###############################################################################
 def DSO_south(dso_marker, dso_type):
     DSO = messier_south[messier_south['Type'] == dso_type]
@@ -3352,9 +3357,17 @@ def RotuloMessierNorte():
 ###############################################################################
 def CALD_north(dso_marker, dso_type):
     DSO = caldwell_north[caldwell_north['Type'] == dso_type]
-    plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
-                90 - (DSO.DecDeg + DSO.DecMinute / 60),
-                alpha=0.3, c='gray', marker=dso_marker, zorder=3)
+    symbol = dso_marker
+    if retangular:
+        plt.scatter(DSO.RAHour + DSO.RAMinute / 60,
+                    DSO.DecDeg + DSO.DecMinute / 60,
+                    alpha=0.5, c='gray', marker=symbol, zorder=3
+                    )
+    else:
+        plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
+                    90 - (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.3, c='gray', marker=symbol, zorder=3
+                    )
 
 
 def CaldwellNorte():
@@ -3387,25 +3400,33 @@ def RotuloCaldwellNorte():
             caldwell_north.DecDeg,
             caldwell_north.DecMinute,
             caldwell_north.AlphaLabel):
-        plt.annotate(str(numero_m),
-                     xy=((ra_m + ra_min_m / 60) * 2 * np.pi / 24,
-                         90 - (dec_m + dec_min_m / 60)),
-                     color='gray', alpha=0.5 * alpha_label,
-                     fontsize='small')
-    if retangular:
-        plt.annotate(str(numero_m),
-                     xy=(ra_m + ra_min_m / 60,
-                         dec_m + dec_min_m / 60),
-                     color='gray', alpha=0.5 * alpha_label,
-                     fontsize='small')
+        if polar_norte or polar_duplo:
+            plt.annotate(str(numero_m),
+                         xy=((ra_m + ra_min_m / 60) * 2 * np.pi / 24,
+                             90 - (dec_m + dec_min_m / 60)),
+                         color='gray', alpha=0.5 * alpha_label,
+                         fontsize='small')
+        if retangular:
+            plt.annotate(str(numero_m),
+                         xy=(ra_m + ra_min_m / 60,
+                             dec_m + dec_min_m / 60),
+                         color='gray', alpha=0.5 * alpha_label,
+                         fontsize='small')
 
 
 ###############################################################################
 def CALD_south(dso_marker, dso_type):
     DSO = caldwell_south[caldwell_south['Type'] == dso_type]
-    plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
-                90 - (DSO.DecDeg + DSO.DecMinute / 60),
-                alpha=0.3, c='gray', marker=dso_marker, zorder=3)
+    if retangular:
+        plt.scatter(DSO.RAHour + DSO.RAMinute / 60,
+                    -1 * (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.5, c='gray', marker=dso_marker, zorder=3
+                    )
+    else:
+        plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
+                    90 - (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.3, c='gray', marker=dso_marker, zorder=3
+                    )
 
 
 def CaldwellSul():
@@ -3438,17 +3459,18 @@ def RotuloCaldwellSul():
             caldwell_south.DecDeg,
             caldwell_south.DecMinute,
             caldwell_south.AlphaLabel):
-        plt.annotate(str(numero_m),
-                     xy=((ra_m + ra_min_m / 60) * 2 * np.pi / 24,
-                         90 - (dec_m + dec_min_m / 60)),
-                     color='gray', alpha=0.5 * alpha_label,
-                     fontsize='small')
-    if retangular:
-        plt.annotate(str(numero_m),
-                     xy=(ra_m + ra_min_m / 60,
-                         dec_m + dec_min_m / 60),
-                     color='gray', alpha=0.5 * alpha_label,
-                     fontsize='small')
+        if polar_sul or polar_duplo:
+            plt.annotate(str(numero_m),
+                         xy=((ra_m + ra_min_m / 60) * 2 * np.pi / 24,
+                             90 - (dec_m + dec_min_m / 60)),
+                         color='gray', alpha=0.5 * alpha_label,
+                         fontsize='small')
+        if retangular:
+            plt.annotate(str(numero_m),
+                         xy=(ra_m + ra_min_m / 60,
+                             -1 * (dec_m + dec_min_m / 60)),
+                         color='gray', alpha=0.5 * alpha_label,
+                         fontsize='small')
 
 
 ###############################################################################
@@ -3628,6 +3650,16 @@ if retangular:
         MessierSul()
         #CRIA ROTULOS Mxx
         RotuloMessierSul()
+
+    if caldwell:
+        #HEMISFERIO SUL
+        CaldwellSul()
+        #CRIA ROTULOS NGC/ICxxxx
+        RotuloCaldwellSul()
+        #HEMISFERIO NORTE
+        CaldwellNorte()
+        #CRIA ROTULOS Mxx
+        RotuloCaldwellNorte()
 
     ###########################################################################
 
