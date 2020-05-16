@@ -3233,9 +3233,16 @@ def LinesNorth():
 ###############################################################################
 def DSO_south(dso_marker, dso_type):
     DSO = messier_south[messier_south['Type'] == dso_type]
-    plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
-                90 - (DSO.DecDeg + DSO.DecMinute / 60),
-                alpha=0.3, c='gray', marker=dso_marker, zorder=3)
+    if retangular:
+        plt.scatter(DSO.RAHour + DSO.RAMinute / 60,
+                    -1 * (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.5, c='gray', marker=dso_marker, zorder=3
+                    )
+    else:
+        plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
+                    90 - (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.3, c='gray', marker=dso_marker, zorder=3
+                    )
 
 
 def MessierSul():
@@ -3286,9 +3293,16 @@ def RotuloMessierSul():
 def DSO_north(dso_marker, dso_type):
     DSO = messier_north[messier_north['Type'] == dso_type]
     symbol = dso_marker
-    plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
-                90 - (DSO.DecDeg + DSO.DecMinute / 60),
-                alpha=0.3, c='gray', marker=symbol, zorder=3)
+    if retangular:
+        plt.scatter(DSO.RAHour + DSO.RAMinute / 60,
+                    DSO.DecDeg + DSO.DecMinute / 60,
+                    alpha=0.5, c='gray', marker=symbol, zorder=3
+                    )
+    else:
+        plt.scatter((DSO.RAHour + DSO.RAMinute / 60) * 2 * np.pi / 24,
+                    90 - (DSO.DecDeg + DSO.DecMinute / 60),
+                    alpha=0.3, c='gray', marker=symbol, zorder=3
+                    )
 
 
 def MessierNorte():
@@ -3564,7 +3578,10 @@ if messier:
 # importa catalogo e separa hemisferios
 if caldwell:
     cat_caldwell = pd.DataFrame(pd.read_csv('CaldwellObjects.csv', sep=',',
-                                            usecols=[0, 2, 4, 5, 6, 7, 8, 9, 11, 13]))
+                                            usecols=[0, 2, 4, 5, 6, 7,
+                                                     8, 9, 11, 13]
+                                            )
+                                )
     caldwell_south = cat_caldwell[cat_caldwell.DecSign == '-']
     caldwell_north = cat_caldwell[cat_caldwell.DecSign == '+']
 
@@ -3604,15 +3621,11 @@ if retangular:
     # MESSIER
     if messier:
         #HEMISFERIO NORTE
-        plt.scatter(messier_north.RAHour + messier_north.RAMinute / 60,
-                    (messier_north.DecDeg + messier_north.DecMinute / 60),
-                    alpha=0.5, c='gray')
+        MessierNorte()
         #CRIA ROTULOS Mxx
         RotuloMessierNorte()
         #HEMISFERIO SUL
-        plt.scatter(messier_south.RAHour + messier_south.RAMinute / 60,
-                    -1 * (messier_south.DecDeg + messier_south.DecMinute / 60),
-                    alpha=0.5, c='gray')
+        MessierSul()
         #CRIA ROTULOS Mxx
         RotuloMessierSul()
 
