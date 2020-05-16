@@ -14,7 +14,7 @@ O tamanho e a resolução são ajustáveis para visualização e impressão.
 A exibição de estrelas e objetos celestes pode ser desabilitada, criando
 cartas em branco que podem ser utilizadas em atividades educacionais.
 
-    Copyright (C) 2020  Wandeclayt M./CeuProfundo.com
+    Copyright (C) 2020  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     Este programa é um software livre: você pode redistribuí-lo e/ou
     modificá-lo sob os termos da Licença Pública Geral GNU, conforme
@@ -36,7 +36,7 @@ Size and resolution can be adjusted for viewing or printing.
 Star and DSO exhibition can be toggled off to generate blank templates for
 educational purposes.
 
-    Copyright (C) 2020  Wandeclayt M./CeuProfundo.com
+    Copyright (C) 2020  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ darkmode = args.Dark
 stars = args.Stars
 messier = args.Messier
 caldwell = args.Caldwell
-ic = args.IC
+#ic = args.IC
 polar_sul = args.sul
 polar_norte = args.norte
 polar_duplo = args.dupla
@@ -135,11 +135,11 @@ png = args.png
 
 file_format = '.pdf'
 
-if args.all:  # GERA TODAS AS CARTAS
-    retangular = True
-    polar_sul = True
-    polar_norte = True
-    polar_duplo = True
+#if args.all:  # GERA TODAS AS CARTAS
+#    retangular = True
+#    polar_sul = True
+#    polar_norte = True
+#    polar_duplo = True
 
 
 # DEFINE SE A FAIXA ONDE OBJETOS PODEM SER OCULTADOS PELA LUA E' EXIBIDA
@@ -3724,7 +3724,7 @@ if polar_norte:
         RotuloCaldwellNorte()
     ###########################################################################
 
-    EclipticaPolarNorte()
+    EcliticaPolarNorte()
     GridPolar()
     GridDeclinacaoNorte()
 
