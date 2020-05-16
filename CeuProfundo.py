@@ -115,6 +115,8 @@ ap.add_argument('-d', '--dupla', action='store_true',
 #                help='Plota cartas com objetos do Index Catalog.')
 #ap.add_argument('-N', '--NGC', action='store_true',
 #                help='Plota cartas com objetos NGC.')
+ap.add_argument('-f', '--png', action='store_true',
+                help='Muda arquivo de saída para png.')
 
 args = ap.parse_args()
 
@@ -129,8 +131,9 @@ polar_sul = args.sul
 polar_norte = args.norte
 polar_duplo = args.dupla
 retangular = args.retangular
+png = args.png
 
-file_format = '.png'
+file_format = '.pdf'
 
 if args.all:  # GERA TODAS AS CARTAS
     retangular = True
@@ -3521,6 +3524,10 @@ print(timestring + '\n\n')
 
 # String YYMMDDhhmmss para gerar nomes unicos de arquivos
 filename = time.strftime("%y%m%d%H%M%S", time.localtime())
+
+#Muda o formato de saída se preciso
+if png:
+    file_format = '.png'
 
 #Registra tempo inicial da execucao
 t1 = time.time()
