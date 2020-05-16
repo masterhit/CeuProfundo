@@ -1,6 +1,8 @@
 # CeuProfundo
 Python 3/Matplotlib generated star charts.
 
+![](carta-dupla.png)
+
 [PT-BR]
 CeuProfundo plota cartas celestes retangulares e polares utilizando
 dados de catálogos estelares e de objetos de céu profundo.
