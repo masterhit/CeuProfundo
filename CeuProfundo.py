@@ -115,8 +115,8 @@ ap.add_argument('-d', '--dupla', action='store_true',
 #                help='Plota cartas com objetos do Index Catalog.')
 #ap.add_argument('-N', '--NGC', action='store_true',
 #                help='Plota cartas com objetos NGC.')
-ap.add_argument('-f', '--png', action='store_true',
-                help='Muda arquivo de saída para png.')
+ap.add_argument('-g', '--png', action='store_true',
+                help='Muda extensão do arquivo de saída para .png.')
 
 args = ap.parse_args()
 
