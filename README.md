@@ -25,9 +25,9 @@ Acreditamos que um mapa celeste, compreendendo todo o céu, seja indispensável 
 O catálogo estelar utilizado é o *Bright Star Catalog 5th Edition, Preliminary (BSC5P)* com estrelas até magnitude 6.5.
 Os objetos de céu profundo incluem os catálogos Messier e Caldwell, populares entre amadores e observáveis através de instrumentos modestos. Esta escolha de catálogos torna estas cartas particularmente interessantes para astrônomos amadores com pequenos telescópios (ou mesmo instrumentos mais robustos) que desejem explorar objetos mais desafiadores que a Lua e os Planetas.
 
-A principal apresentação das cartas é em forma de um mapa duplo, com os hemisférios celestes sul e norte em gráficos polares. Uma apresentação retangular limitada entre as declinações +65º e -65º também pode ser gerada.
+A principal apresentação das cartas é em forma de um mapa duplo, com os hemisférios celestes sul e norte em gráficos polares. Os hemisférios também podem ser gerados individualmente e uma apresentação retangular limitada entre as declinações +65º e -65º também está implementada.
 
-Os arquivos gerados são salvos em formato PDF e, opcionalmente, em formato PNG.
+Os arquivos gerados são salvos em formato PDF por padrão e, opcionalmente, em formato PNG.
 
 ### Instruções:
 
@@ -40,8 +40,8 @@ Os arquivos gerados são salvos em formato PDF e, opcionalmente, em formato PNG.
     ```
 * Argumentos opcionais:
     ```
-  -h, --help        show this help message and exit
-  -v, --version     show program's version number and exit
+  -h, --help        Exibe esta mensagem.
+  -v, --version     Exibe a versão do programa.
   -S, --Stars       Plota cartas com estrelas.
   -M, --Messier     Plota cartas com objetos dos catálogos Messier e Caldwell.
   -D, --Dark        Usa fundo escuro.
