@@ -16,6 +16,12 @@ Size and resolution can be adjusted for viewing or printing.
 Star and DSO exhibition can be toggled off to generate blank templates for
 educational purposes.
 
+### APresentação:
+
+Aplicativos de celular para identificação do céu são úteis, mas possuem a limitação de mostrar apenas um pequeneo campo do céu, reduzindo a consciência situacional do observador. Um objeto astronômico muito interessante pode estar ali do lado, muito próximo da região para onde você está olhando, mas não vai ser exibido pelo aplicativo.
+
+Acreditamos que um mapa celeste, exibindo todo o céu, seja indispensável para quem deseja conhecer a esfera celeste e se familiarizar com as constelações e os objetos de céu profundo nelas abrigados. No entanto, cartas celestes neste formato não são encontradas facilmente. Por isto desenvolvemos um script que constrói, a partir de catálogos estelares e de objetos do céu profundo, uma carta celeste que pode ser impressa e utilizada como ferramenta de planejamento na observação do céu, como recurso pedagógico em salas de aula ou mesmo transformada em pôster.
+
 ### Instruções:
 
 * Baixe e salve locamente os arquivos deste repositório.
