@@ -437,9 +437,45 @@ def rodape():
 
 
 def Line(StarA, StarB):
-    con = ConnectionPatch(StarA, StarB, coordsA="data", coordsB="data",
-                          arrowstyle="-", color="gray", alpha=0.5)
-    ax.add_artist(con)
+    #
+    #Estrelas longe demais: devem estar em bordas opostas!
+    #Solução: plotar estrela imaginária fora da borda e ligar à mais próxima
+    #Lembrando que: RA cresce para a esquerda no plano
+    if retangular and abs(StarA[0] - StarB[0]) > 20:
+        if(StarA[0] - StarB[0] < 0):
+            StarAUX = StarA
+            StarA = StarB
+            StarB = StarAUX
+        #StarA sempre à esquerda de StarB
+
+        #Projeta um clone de B à esquerda de A e desenha a linha
+        #plt.plot(StarB[0]+24,StarB[1], 'o', color='purple', clip_on=False)
+        #Teste para ver a projeção
+
+        #estrela auxiliar para projeção
+        StarAUX = Coordenadas(StarB[0] + 24, StarB[1])
+
+        DEC_AUX = StarA[1] + ((StarAUX[1] - StarA[1]) *
+                              (24 - StarA[0]) / (StarAUX[0] - StarA[0])
+                              )
+        #Declinação da projeção
+        #plt.plot(24,DEC_AUX, 'o', color='blue', clip_on=False)
+        #plt.plot(0,DEC_AUX, 'o', color='blue', clip_on=False)
+
+        StarAUX = Coordenadas(24, DEC_AUX)  # projeção à esquerda
+        con = ConnectionPatch(StarA, StarAUX, coordsA="data", coordsB="data",
+                              arrowstyle="-", color="grey", alpha=0.5)
+        ax.add_artist(con)
+
+        StarAUX = Coordenadas(0, DEC_AUX)  # projeção à direita
+        con = ConnectionPatch(StarB, StarAUX, coordsA="data", coordsB="data",
+                              arrowstyle="-", color="grey", alpha=0.5)
+        ax.add_artist(con)
+
+    else:
+        con = ConnectionPatch(StarA, StarB, coordsA="data", coordsB="data",
+                              arrowstyle="-", color="grey", alpha=0.5)
+        ax.add_artist(con)
 
 
 # AJUSTE/CONVERSAO DE COORDENADAS
@@ -3510,7 +3546,8 @@ def GridPolar():
     lines, labels = plt.thetagrids(range(0, 360, 5),
                                    ('0h00', '', '', '1h00', '', '', '2h00', '',
                                     '', '3h00', '', '', '4h00', '', '', '5h00',
-                                    '', '', '6h00', '', '', '7h00', '', '', '8h00',
+                                    '', '', '6h00', '', '', '7h00', '', '',
+                                    '8h00',
                                     '', '', '9h00', '', '', '10h00', '', '',
                                     '11h00', '', '', '12h00', '', '', '13h00',
                                     '', '', '14h00', '', '', '15h00', '', '',
@@ -3549,7 +3586,7 @@ def GridDeclinacaoNorte():
 #%% CABECALHO
 
 # Imprime na tela o texto do arquivo CEUPROFUNDO
-CEUPROFUNDO = open("CEUPROFUNDO", 'r')
+CEUPROFUNDO = open("CEUPROFUNDO", 'r', encoding='utf-8')
 CEUPROFUNDO_txt = CEUPROFUNDO.read()
 print(CEUPROFUNDO_txt)
 CEUPROFUNDO.close()
@@ -3618,6 +3655,9 @@ if retangular:
 
     fig = plt.figure(figsize=(2.0 * plot_size, plot_size), dpi=plot_dpi)
     ax = plt.subplot(111)
+    
+    
+    
     ###########################################################################
     # Ecliptica
 
