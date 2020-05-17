@@ -16,7 +16,7 @@ Size and resolution can be adjusted for viewing or printing.
 Star and DSO exhibition can be toggled off to generate blank templates for
 educational purposes.
 
-### APresentação:
+### Apresentação:
 
 Aplicativos de celular para identificação do céu são úteis, mas possuem a limitação de mostrar apenas um pequeneo campo do céu, reduzindo a consciência situacional do observador. Um objeto astronômico muito interessante pode estar ali do lado, muito próximo da região para onde você está olhando, mas não vai ser exibido pelo aplicativo.
 
