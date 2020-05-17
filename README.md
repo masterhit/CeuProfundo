@@ -20,7 +20,14 @@ educational purposes.
 
 Aplicativos de celular para identificação do céu são úteis, mas possuem a limitação de mostrar apenas um pequeno campo do céu, reduzindo a consciência situacional do observador. Um objeto astronômico muito interessante pode estar ali do lado, muito próximo da região para onde você está olhando, mas não vai ser exibido pelo aplicativo.
 
-Acreditamos que um mapa celeste, exibindo todo o céu, seja indispensável para quem deseja conhecer a esfera celeste e se familiarizar com as constelações e os objetos de céu profundo nelas abrigados. No entanto, cartas celestes neste formato não são encontradas facilmente. Por isto desenvolvemos um script que constrói, a partir de catálogos estelares e de objetos do céu profundo, uma carta celeste que pode ser impressa e utilizada como ferramenta de planejamento na observação do céu, como recurso pedagógico em salas de aula ou mesmo transformada em pôster.
+Acreditamos que um mapa celeste, compreendendo todo o céu, seja indispensável para quem deseja conhecer a esfera celeste e se familiarizar com as constelações e os objetos de céu profundo nelas abrigados. No entanto, cartas celestes neste formato não são encontradas facilmente. Por isto desenvolvemos um *script* que constrói, a partir de catálogos estelares e de objetos do céu profundo, uma carta celeste que pode ser impressa e utilizada como ferramenta de planejamento na observação do céu, como recurso pedagógico em salas de aula ou mesmo transformada em pôster.
+
+O catálogo estelar utilizado é o *Bright Star Catalog 5th Edition, Preliminary (BSC5P)* com estrelas até magnitude 6.5.
+Os objetos de céu profundo incluem os catálogos Messier e Caldwell, populares entre amadores e observáveis através de instrumentos modestos. Esta escolha de catálogos torna estas cartas particularmente interessantes para astrônomos amadores com pequenos telescópios (ou mesmo instrumentos mais robustos) que desejem explorar objetos mais desafiadores que a Lua e os Planetas.
+
+A principal apresentação das cartas é em forma de um mapa duplo, com os hemisférios celestes sul e norte em gráficos polares. Uma apresentação retangular limitada entre as declinações +65º e -65º também pode ser gerada.
+
+Os arquivos gerados são salvos em formato PDF e, opcionalmente, em formato PNG.
 
 ### Instruções:
 
