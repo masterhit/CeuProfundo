@@ -1,4 +1,4 @@
-# CeuProfundo
+# CeuProfundo v 0.5.0
 
 ![](SMd.png)
 
