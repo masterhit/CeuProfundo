@@ -56,6 +56,9 @@ Os arquivos gerados são salvos em formato PDF por padrão e, opcionalmente, em 
     ```
     python CeuProfundo.py -S -M -d
     ```
+    
+    ![](SMDd.png)
+    
     * Para gerar a carta dupla em png, com os hemisférios norte e sul em fundo escuro, incluindo as estrelas do Bright Star Catalogue e os objetos de céu profundo dos catálogos Messier e Caldwell:
     ```
     python CeuProfundo.py -S -M -D -d -g
