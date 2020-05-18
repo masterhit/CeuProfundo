@@ -60,3 +60,10 @@ Os arquivos gerados são salvos em formato PDF por padrão e, opcionalmente, em 
     ```
     python CeuProfundo.py -S -M -D -d -g
     ```
+    
+    ![](SMDr.png)
+
+    * Para gerar a carta retangular em pdf, cem fundo escuro, incluindo as estrelas do Bright Star Catalogue e os objetos de céu profundo dos catálogos Messier e Caldwell:
+    ```
+    python CeuProfundo.py -S -M -D -r
+    ```
