@@ -4,7 +4,7 @@
 """
 # ## CARTA CELESTE - www.ceuprofundo.com
 
-Versão 0.4.1
+Versão 0.5.0
 
 
 [PT-BR]
@@ -90,11 +90,11 @@ ap = argparse.ArgumentParser(description='Ceu Profundo - Cartas Celestes',
                              prefix_chars='-',
                              prog='Ceu Profundo - Cartas Celestes')
 
-ap.add_argument('-v', '--version', action='version', version='%(prog) s 0.4.1')
+ap.add_argument('-v', '--version', action='version', version='%(prog) s 0.5.0')
 ap.add_argument('-S', '--Stars', action='store_true',
                 help='Plota cartas com estrelas.')
 ap.add_argument('-M', '--Messier', action='store_true',
-                help='Plota cartas com objetos Messier.')
+                help='Plota cartas com objetos Messier e Caldwell.')
 ap.add_argument('-D', '--Dark', action='store_true',
                 help='Usa fundo escuro.')
 ap.add_argument('-r', '--retangular', action='store_true',
@@ -225,7 +225,8 @@ def header():
 
 ###############################################################################
 def rodape():
-    ax = fig.add_subplot(gs[5, 0:1])
+    linha_do_rodape = linhas_do_grid - 1
+    ax = fig.add_subplot(gs[linha_do_rodape, 0:1])
     image = plt.imread('ngc-1365.jpg')
     im = ax.imshow(image)
     patch = Circle((580, 460), radius=300, transform=ax.transData)
@@ -234,7 +235,7 @@ def rodape():
 
 
 ###############################################################################
-    ax = fig.add_subplot(gs[5, 1:2])
+    ax = fig.add_subplot(gs[linha_do_rodape, 1:2])
     ax.set_title('MAGNITUDES')
     ax.set_ylim(8, -2)
     ax.set_xlim(-10, 10)
@@ -245,7 +246,7 @@ def rodape():
     for i in y:
         ax.annotate(str(i), (1, i + 0.1))
 ###############################################################################
-    ax = fig.add_subplot(gs[5, 2:3])
+    ax = fig.add_subplot(gs[linha_do_rodape, 2:3])
     ax.set_title('Objetos de Céu Profundo /\nDeep Sky Objects')
     ax.set_ylim(6, -1)
     ax.set_xlim(-1, 10)
@@ -263,7 +264,7 @@ def rodape():
 
 
 ###############################################################################
-    ax = fig.add_subplot(gs[5, 3:4])
+    ax = fig.add_subplot(gs[linha_do_rodape, 3:4])
     ax.set_title('ALFABETO GREGO /\nGREEK ALPHABET')
     ax.axis('off')
     ax.text(0.25, 0.5,
@@ -295,7 +296,7 @@ def rodape():
             r"$\omega$ - omega" "\n",
             va="center", ha='left')
 ###############################################################################
-    ax = fig.add_subplot(gs[5, 4:7])
+    ax = fig.add_subplot(gs[linha_do_rodape, 4:7])
     ax.set_title('CONSTELAÇÕES / CONSTELLATIONS')
     ax.axis('off')
     ax.text(0, 0.5,
@@ -396,7 +397,7 @@ def rodape():
             va="center", ha='left')
 
 ###############################################################################
-    ax = fig.add_subplot(gs[5, 7:])
+    ax = fig.add_subplot(gs[linha_do_rodape, 7:])
     #creditos = "GNU Public License 3.0\n© 2020 Wandeclayt Melo"
     ax.axis('off')
     line0 = "Copyright © 2020 Wandeclayt Melo/\n"
@@ -411,7 +412,7 @@ def rodape():
 
 
 """
-    ax = fig.add_subplot(gs[5, 2:3])
+    ax = fig.add_subplot(gs[linha_do_rodape, 2:3])
     ax.set_title('ÍNDICE DE COR (B-V) /\nCOLOR INDEX (B-V)')
     ax.set_ylim(3, -2)
     ax.set_xlim(-10, 10)
@@ -3653,11 +3654,15 @@ if caldwell:
 #%%  CARTA RETANGULAR / RECTANGULAR CHART
 if retangular:
 
-    fig = plt.figure(figsize=(2.0 * plot_size, plot_size), dpi=plot_dpi)
-    ax = plt.subplot(111)
-    
-    
-    
+    fig = plt.figure(figsize=(1.6 * plot_size, plot_size),
+                     dpi=plot_dpi,
+                     constrained_layout=True
+                     )
+
+    linhas_do_grid = 5
+    gs = GridSpec(linhas_do_grid, 8, figure=fig)
+    ax = fig.add_subplot(gs[0:(linhas_do_grid - 1), 0:])
+
     ###########################################################################
     # Ecliptica
 
@@ -3707,6 +3712,7 @@ if retangular:
     Cru()
     LinesNorth()
     LinesSouth()
+
     ###########################################################################
 
     ax.set_title("Carta Retangular | -" + str(declinacao_limite)
@@ -3717,6 +3723,11 @@ if retangular:
     plt.grid(True, alpha=0.6, linewidth=0.4)
     plt.xlabel('Ascenção Reta')
     plt.ylabel('Declinação')
+
+    ###########################################################################
+
+    rodape()
+
     plt.savefig('Retangular_' + filename + file_format, dpi=plot_dpi)
     #plt.show()
 ###############################################################################
@@ -3832,7 +3843,8 @@ if polar_duplo:
     fig = plt.figure(figsize=(1.4 * plot_size, plot_size),
                      dpi=plot_dpi,
                      constrained_layout=True)
-    gs = GridSpec(6, 8, figure=fig)
+    linhas_do_grid = 6
+    gs = GridSpec(linhas_do_grid, 8, figure=fig)
 
 
 #################NORTE
