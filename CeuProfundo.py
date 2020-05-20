@@ -3715,9 +3715,11 @@ if retangular:
 
     ###########################################################################
 
-    ax.set_title("Carta Retangular | -" + str(declinacao_limite)
-                 + "$^\circ$ a " + str(declinacao_limite)
-                 + "$^\circ$\nwww.ceuprofundo.com", va='bottom')
+    ax.set_title("Carta Celeste Retangular | -" +
+                 str(declinacao_limite) + "$^\circ$ a " +
+                 str(declinacao_limite) + "$^\circ$",
+                 va='bottom'
+                 )
     ax.axis([24, 0, -declinacao_limite, declinacao_limite])
     ax.xaxis.set_major_locator(tck.MultipleLocator(3))  # RA Tick a cada 3h
     plt.grid(True, alpha=0.6, linewidth=0.4)
@@ -3840,7 +3842,7 @@ if polar_duplo:
 
     r = np.arange(0, 90, 1)
     theta = 2 * np.pi * r
-    fig = plt.figure(figsize=(1.4 * plot_size, plot_size),
+    fig = plt.figure(figsize=(1.5 * plot_size, plot_size),
                      dpi=plot_dpi,
                      constrained_layout=True)
     linhas_do_grid = 6
@@ -3848,7 +3850,7 @@ if polar_duplo:
 
 
 #################NORTE
-    ax = fig.add_subplot(gs[1:5, 0:4], projection='polar')
+    ax = fig.add_subplot(gs[0:5, 0:4], projection='polar')
     ax.set_theta_zero_location('N')
     ax.set_theta_direction(-1)
     #ax.plot()
@@ -3881,7 +3883,7 @@ if polar_duplo:
     # plt.plot(RA*2*np.pi/24, 23.5*np.sin(RA*2*np.pi/24))
 #################SUL
 
-    ax = fig.add_subplot(gs[1:5, 4:], projection='polar')
+    ax = fig.add_subplot(gs[0:5, 4:], projection='polar')
     ax.set_theta_zero_location('N')
     ax.set_theta_direction(1)
     ax.plot()
