@@ -4,7 +4,7 @@
 """
 # ## CARTA CELESTE - www.ceuprofundo.com
 
-Versão 0.5.0
+Versão 0.6.0
 
 
 [PT-BR]
@@ -14,7 +14,7 @@ O tamanho e a resolução são ajustáveis para visualização e impressão.
 A exibição de estrelas e objetos celestes pode ser desabilitada, criando
 cartas em branco que podem ser utilizadas em atividades educacionais.
 
-    Copyright (C) 2020  Wandeclayt M./N. Palivanas/CeuProfundo.com
+    Copyright (C) 2021  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     Este programa é um software livre: você pode redistribuí-lo e/ou
     modificá-lo sob os termos da Licença Pública Geral GNU, conforme
@@ -36,7 +36,7 @@ Size and resolution can be adjusted for viewing or printing.
 Star and DSO exhibition can be toggled off to generate blank templates for
 educational purposes.
 
-    Copyright (C) 2020  Wandeclayt M./N. Palivanas/CeuProfundo.com
+    Copyright (C) 2021  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ ap = argparse.ArgumentParser(description='Ceu Profundo - Cartas Celestes',
                              prefix_chars='-',
                              prog='Ceu Profundo - Cartas Celestes')
 
-ap.add_argument('-v', '--version', action='version', version='%(prog) s 0.5.0')
+ap.add_argument('-v', '--version', action='version', version='%(prog) s 0.6.0')
 ap.add_argument('-S', '--Stars', action='store_true',
                 help='Plota cartas com estrelas.')
 ap.add_argument('-M', '--Messier', action='store_true',
@@ -149,8 +149,8 @@ faixa_de_ocultacao = False
 declinacao_limite = 65
 
 # TAMANHO/RESOLUCAO DO GRAFICO PARA IMPRESSAO
-plot_size = 25
-plot_dpi = 250
+plot_size = 24
+plot_dpi = 144
 
 """
 ###############################################################################
@@ -225,8 +225,11 @@ def header():
 
 ###############################################################################
 def rodape():
-    linha_do_rodape = linhas_do_grid - 1
-    ax = fig.add_subplot(gs[linha_do_rodape, 0:1])
+    linha_do_rodape = linhas_do_grid - 3
+    
+    #Plot da Galaxia NGC 1365
+    ax = fig.add_subplot(gs[linha_do_rodape:, 0:1])
+    #ax = fig.add_subplot(gs[5:, 0:1])
     image = plt.imread('ngc-1365.jpg')
     im = ax.imshow(image)
     patch = Circle((580, 460), radius=300, transform=ax.transData)
@@ -235,7 +238,7 @@ def rodape():
 
 
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape, 1:2])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 1:2])
     ax.set_title('MAGNITUDES')
     ax.set_ylim(8, -2)
     ax.set_xlim(-10, 10)
@@ -246,7 +249,7 @@ def rodape():
     for i in y:
         ax.annotate(str(i), (1, i + 0.1))
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape, 2:3])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 2:3])
     ax.set_title('Objetos de Céu Profundo /\nDeep Sky Objects')
     ax.set_ylim(6, -1)
     ax.set_xlim(-1, 10)
@@ -264,7 +267,7 @@ def rodape():
 
 
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape, 3:4])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 3:4])
     ax.set_title('ALFABETO GREGO /\nGREEK ALPHABET')
     ax.axis('off')
     ax.text(0.25, 0.5,
@@ -296,8 +299,10 @@ def rodape():
             r"$\omega$ - omega" "\n",
             va="center", ha='left')
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape, 4:7])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 4:7])
     ax.set_title('CONSTELAÇÕES / CONSTELLATIONS')
+    # A linha de cima estava ficando sobreposta a lista de constelacoes
+    # quando o tamanho da imagem era menor... depois a gente resolve isso
     ax.axis('off')
     ax.text(0, 0.5,
             "And - Andromeda\n"
@@ -397,10 +402,10 @@ def rodape():
             va="center", ha='left')
 
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape, 7:])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 7:])
     #creditos = "GNU Public License 3.0\n© 2020 Wandeclayt Melo"
     ax.axis('off')
-    line0 = "Copyright © 2020 Wandeclayt Melo/\n"
+    line0 = "Copyright © 2021 Wandeclayt Melo/\n"
     line1 = "Natália Palivanas.\n"
     line2 = "GNU General Public License 3.0\n\n"
     line3 = "www.ceuprofundo.com\n twitter: @ceuprofundo\n\n"
@@ -436,6 +441,11 @@ def rodape():
 ###############################################################################
 ###############################################################################
 
+#Parametros das Linhas
+
+largura_da_linha = 2
+alfa_linha = 0.4
+
 
 def Line(StarA, StarB):
     #
@@ -465,17 +475,20 @@ def Line(StarA, StarB):
 
         StarAUX = Coordenadas(24, DEC_AUX)  # projeção à esquerda
         con = ConnectionPatch(StarA, StarAUX, coordsA="data", coordsB="data",
-                              arrowstyle="-", color="grey", alpha=0.5)
+                              arrowstyle="-", color="grey", alpha=alfa_linha,
+                              lw=largura_da_linha)
         ax.add_artist(con)
 
         StarAUX = Coordenadas(0, DEC_AUX)  # projeção à direita
         con = ConnectionPatch(StarB, StarAUX, coordsA="data", coordsB="data",
-                              arrowstyle="-", color="grey", alpha=0.5)
+                              arrowstyle="-", color="grey", alpha=alfa_linha,
+                              lw=largura_da_linha)
         ax.add_artist(con)
 
     else:
         con = ConnectionPatch(StarA, StarB, coordsA="data", coordsB="data",
-                              arrowstyle="-", color="grey", alpha=0.5)
+                              arrowstyle="-", color="grey", alpha=alfa_linha,
+                              lw=largura_da_linha)
         ax.add_artist(con)
 
 
@@ -3652,6 +3665,13 @@ if caldwell:
 ###############################################################################
 
 #%%  CARTA RETANGULAR / RECTANGULAR CHART
+"""
+################################ CARTA RETANGULAR #############################
+#
+# Ascenção Reta (R.A.) crescente no sentido horário.
+#
+###############################################################################
+"""
 if retangular:
 
     fig = plt.figure(figsize=(1.6 * plot_size, plot_size),
@@ -3659,9 +3679,10 @@ if retangular:
                      constrained_layout=True
                      )
 
-    linhas_do_grid = 5
-    gs = GridSpec(linhas_do_grid, 8, figure=fig)
-    ax = fig.add_subplot(gs[0:(linhas_do_grid - 1), 0:])
+    linhas_do_grid = 10
+    colunas_do_grid = 8
+    gs = GridSpec(linhas_do_grid, colunas_do_grid, figure=fig)
+    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 0:])
 
     ###########################################################################
     # Ecliptica
@@ -3722,7 +3743,7 @@ if retangular:
                  )
     ax.axis([24, 0, -declinacao_limite, declinacao_limite])
     ax.xaxis.set_major_locator(tck.MultipleLocator(3))  # RA Tick a cada 3h
-    plt.grid(True, alpha=0.6, linewidth=0.4)
+    plt.grid(True, alpha=0.6, linewidth=0.5)
     plt.xlabel('Ascenção Reta')
     plt.ylabel('Declinação')
 
@@ -3745,7 +3766,7 @@ if retangular:
 """
 
 if polar_sul:
-    r = np.arange(90, 0, 1)
+    r = np.arange(90, 0, 1) #declinacao de 0 a 90, passos de 1 grau
     theta = 2 * np.pi * r
 
     fig = plt.figure(figsize=(plot_size, plot_size), dpi=plot_dpi)
@@ -3792,7 +3813,7 @@ if polar_sul:
 ###############################################################################
 """
 if polar_norte:
-    r = np.arange(0, 90, 1)
+    r = np.arange(0, 90, 1) #declinacao de 0 a 90, passos de 1 grau
     theta = 2 * np.pi * r
 
     fig = plt.figure(figsize=(plot_size, plot_size), dpi=plot_dpi)
@@ -3840,20 +3861,19 @@ if polar_norte:
 
 if polar_duplo:
 
-    r = np.arange(0, 90, 1)
+    r = np.arange(0, 90, 1) #declinacao de 0 a 90, passos de 1 grau
     theta = 2 * np.pi * r
     fig = plt.figure(figsize=(1.5 * plot_size, plot_size),
                      dpi=plot_dpi,
                      constrained_layout=True)
-    linhas_do_grid = 6
+    linhas_do_grid = 10
     gs = GridSpec(linhas_do_grid, 8, figure=fig)
 
 
 #################NORTE
-    ax = fig.add_subplot(gs[0:5, 0:4], projection='polar')
+    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 0:4], projection='polar')
     ax.set_theta_zero_location('N')
     ax.set_theta_direction(-1)
-    #ax.plot()
 
     if stars:
         StarsNorte()
@@ -3883,10 +3903,9 @@ if polar_duplo:
     # plt.plot(RA*2*np.pi/24, 23.5*np.sin(RA*2*np.pi/24))
 #################SUL
 
-    ax = fig.add_subplot(gs[0:5, 4:], projection='polar')
+    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 4:], projection='polar')
     ax.set_theta_zero_location('N')
     ax.set_theta_direction(1)
-    ax.plot()
 
     if stars:
         StarsSul()
