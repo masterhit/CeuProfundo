@@ -1,4 +1,4 @@
-########################## CEU PROFUNDO v 0.5.0 ###############################
+########################## CEU PROFUNDO v 0.7.0 ###############################
 
 CeuProfundo plota cartas celestes retangulares e polares utilizando 
 dados de catálogos estelares e de objetos de céu profundo.
@@ -6,7 +6,7 @@ O tamanho e a resolução são ajustáveis para visualização e impressão.
 A exibição de estrelas e objetos celestes pode ser desabilitada, criando
 cartas em branco que podem ser utilizadas em atividades educacionais.
 
-    Copyright (C) 2020  Wandeclayt M./N. Palivanas/CeuProfundo.com
+    Copyright (C) 2022  Wandeclayt M./N. Palivanas/CeuProfundo.com
     
     Este programa é um software livre: você pode redistribuí-lo e/ou
     modificá-lo sob os termos da Licença Pública Geral GNU, conforme
