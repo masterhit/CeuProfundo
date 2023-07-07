@@ -4,7 +4,7 @@
 """
 # ## CARTA CELESTE - www.ceuprofundo.com
 
-Versão 0.6.0
+Versão 0.9.4
 
 
 [PT-BR]
@@ -14,15 +14,15 @@ O tamanho e a resolução são ajustáveis para visualização e impressão.
 A exibição de estrelas e objetos celestes pode ser desabilitada, criando
 cartas em branco que podem ser utilizadas em atividades educacionais.
 
-    Copyright (C) 2021  Wandeclayt M./N. Palivanas/CeuProfundo.com
+    Copyright (C) 2023  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     Este programa é um software livre: você pode redistribuí-lo e/ou
     modificá-lo sob os termos da Licença Pública Geral GNU, conforme
     publicado pela Free Software Foundation, seja a versão 3 da Licença
     ou (a seu critério) qualquer versão posterior.
 
-    Este programa é distribuído na esperança de que seja útil,
-    mas SEM QUALQUER GARANTIA; sem a garantia implícita de
+    Este programa é distribuído na intenção de que seja útil,
+    mas SEM QUALQUER GARANTIA; inclusive sem a garantia implícita de
     COMERCIALIZAÇÃO OU ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Veja a
     Licença Pública Geral GNU para obter mais detalhes.
 
@@ -36,7 +36,7 @@ Size and resolution can be adjusted for viewing or printing.
 Star and DSO exhibition can be toggled off to generate blank templates for
 educational purposes.
 
-    Copyright (C) 2021  Wandeclayt M./N. Palivanas/CeuProfundo.com
+    Copyright (C) 2023  Wandeclayt M./N. Palivanas/CeuProfundo.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -90,7 +90,8 @@ ap = argparse.ArgumentParser(description='Ceu Profundo - Cartas Celestes',
                              prefix_chars='-',
                              prog='Ceu Profundo - Cartas Celestes')
 
-ap.add_argument('-v', '--version', action='version', version='%(prog) s 0.6.0')
+ap.add_argument('-v', '--version', action='version',
+                version='%(prog) s 0.7.0')
 ap.add_argument('-S', '--Stars', action='store_true',
                 help='Plota cartas com estrelas.')
 ap.add_argument('-M', '--Messier', action='store_true',
@@ -122,7 +123,7 @@ args = ap.parse_args()
 
 
 # ARGUMENTOS
-darkmode = args.Dark
+darkmode = args.Dark  # Carta com fundo escuro
 stars = args.Stars
 messier = args.Messier
 caldwell = args.Messier
@@ -136,11 +137,14 @@ png = args.png
 file_format = '.pdf'
 
 #if args.all:  # GERA TODAS AS CARTAS
-#    retangular = True
+retangular = False
 #    polar_sul = True
 #    polar_norte = True
-#    polar_duplo = True
-
+polar_duplo = True
+stars = True
+messier = True
+caldwell = True
+darkmode = False
 
 # DEFINE SE A FAIXA ONDE OBJETOS PODEM SER OCULTADOS PELA LUA E' EXIBIDA
 faixa_de_ocultacao = False
@@ -151,6 +155,8 @@ declinacao_limite = 65
 # TAMANHO/RESOLUCAO DO GRAFICO PARA IMPRESSAO
 plot_size = 24
 plot_dpi = 144
+fonte_constelacao = 16
+fonte_do_texto = 14
 
 """
 ###############################################################################
@@ -161,11 +167,12 @@ plot_dpi = 144
 """
 #%%
 # PARAMETROS DE TAMANHO DO PLOT DAS ESTRELAS
-# magnitude=(plot_dpi/fator)*(base**-df.V)-limite
+# magnitude = (plot_dpi/fator) * (base**-df.V)-limite
+
 base = 0.6 * np.e
-limite = 4
-fator = 3
-star_alpha = 0.4
+limite = 4.5 #v0.9.0 (limite = 4)
+fator = 1.2
+star_alpha = 0.5
 alpha = star_background = 0.7
 
 
@@ -216,30 +223,42 @@ def StarsNorte():
 #%%
 ###############################################################################
 def header():
-    ax = fig.add_subplot(gs[0, :])
+    ax = fig.add_subplot(gs[1, :])
     ax.axis('off')
-    ax.text(0.5, 0, '',
+    ax.text(0.5, 0.55, 'Carta Celeste / Sky Chart\nProjeto Céu Profundo\nwww.ceuprofundo.com',
             va='center', ha='center',
             fontsize=24, color='k')
 
 
-###############################################################################
-def rodape():
-    linha_do_rodape = linhas_do_grid - 3
-    
+
     #Plot da Galaxia NGC 1365
-    ax = fig.add_subplot(gs[linha_do_rodape:, 0:1])
-    #ax = fig.add_subplot(gs[5:, 0:1])
-    image = plt.imread('ngc-1365.jpg')
-    im = ax.imshow(image)
+    ax = fig.add_subplot(gs[0,:])
+    # #ax = fig.add_subplot(gs[5:, 0:1])
+    logoGalaxia = plt.imread('ngc-1365.jpg')
+    im = ax.imshow(logoGalaxia)
     patch = Circle((580, 460), radius=300, transform=ax.transData)
     im.set_clip_path(patch)
     ax.axis('off')
+    
+    
+###############################################################################
+def rodape():
+    fonte_do_titulo = 16
+    #fonte_do_texto = 12
+    linha_do_rodape = linhas_do_grid - 3
 
+    #Plot da Galaxia NGC 1365
+    #ax = fig.add_subplot(gs[linha_do_rodape:, 0:2])
+    # #ax = fig.add_subplot(gs[5:, 0:1])
+    #logoGalaxia = plt.imread('ngc-1365.jpg')
+    #im = ax.imshow(logoGalaxia)
+    #patch = Circle((580, 460), radius=300, transform=ax.transData)
+    #im.set_clip_path(patch)
+    #ax.axis('off')
 
 ###############################################################################
     ax = fig.add_subplot(gs[linha_do_rodape:, 1:2])
-    ax.set_title('MAGNITUDES')
+    ax.set_title('MAGNITUDES', fontsize=fonte_do_titulo)
     ax.set_ylim(8, -2)
     ax.set_xlim(-10, 10)
     ax.axis('off')
@@ -247,10 +266,11 @@ def rodape():
     y = np.arange(-1, 7, 1)
     plt.scatter(x, y, s=StarMagnitude(y), alpha=0.5)
     for i in y:
-        ax.annotate(str(i), (1, i + 0.1))
+        ax.annotate(str(i), (3, i + 0.1), fontsize=fonte_do_texto)
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape:, 2:3])
-    ax.set_title('Objetos de Céu Profundo /\nDeep Sky Objects')
+    ax = fig.add_subplot(gs[linha_do_rodape:, 2:5])
+    ax.set_title('\nObjetos de Céu Profundo /\nDeep Sky Objects',
+                 fontsize=fonte_do_titulo)
     ax.set_ylim(6, -1)
     ax.set_xlim(-1, 10)
     ax.axis('off')
@@ -263,14 +283,14 @@ def rodape():
                 )
     for i in range(0, 5, 1):
         plt.scatter(0, i, c='k', marker=DSO_symbol[i], s=60, alpha=0.5)
-        ax.annotate(DSO_name[i], (1, i + 0.1))
+        ax.annotate(DSO_name[i], (1, i + 0.1), fontsize=fonte_do_texto)
 
 
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape:, 3:4])
-    ax.set_title('ALFABETO GREGO /\nGREEK ALPHABET')
+    ax = fig.add_subplot(gs[linha_do_rodape:, 10:12])
+    ax.set_title('ALFABETO GREGO /\nGREEK ALPHABET', fontsize=fonte_do_titulo)
     ax.axis('off')
-    ax.text(0.25, 0.5,
+    ax.text(0.1, 0.6,
             r"$\alpha$ - alpha" "\n"
             r"$\beta$ - beta" "\n"
             r"$\gamma$ - gamma" "\n"
@@ -284,8 +304,8 @@ def rodape():
             r"$\lambda$ - lambda" "\n"
             r"$\mu$ - mu" "\n"
             r"$\nu$ - nu" "\n",
-            va="center", ha='left')
-    ax.text(0.5, 0.5,
+            va="center", ha='left', fontsize=fonte_do_texto)
+    ax.text(0.65, 0.6,
             r"$\xi$ - xi (ksi)" "\n"
             r"$o$ - omicron" "\n"
             r"$\pi$ - pi" "\n"
@@ -297,10 +317,10 @@ def rodape():
             r"$\chi$ - chi" "\n"
             r"$\psi$ - psi" "\n"
             r"$\omega$ - omega" "\n",
-            va="center", ha='left')
+            va="center", ha='left', fontsize=fonte_do_texto)
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape:, 4:7])
-    ax.set_title('CONSTELAÇÕES / CONSTELLATIONS')
+    ax = fig.add_subplot(gs[linha_do_rodape:, 5:10])
+    ax.set_title('CONSTELAÇÕES / CONSTELLATIONS', fontsize=fonte_do_titulo)
     # A linha de cima estava ficando sobreposta a lista de constelacoes
     # quando o tamanho da imagem era menor... depois a gente resolve isso
     ax.axis('off')
@@ -327,7 +347,7 @@ def rodape():
             "Cet - Cetus\n"
             "Cha - Chamaeleon\n"
             "Cir - Circinus\n",
-            va="center", ha='left')
+            va="center", ha='left', fontsize=fonte_do_texto)
     ax.text(0.2775, 0.5,
             "Cnc - Cancer\n"
             "Col - Columba\n"
@@ -351,7 +371,7 @@ def rodape():
             "Hya - Hydra\n"
             "Hyi - Hydrus\n"
             "Ind - Indus\n",
-            va="center", ha='left')
+            va="center", ha='left', fontsize=fonte_do_texto)
     ax.text(0.55, 0.5,
             "Lac - Lacerta\n"
             "Leo - Leo\n"
@@ -375,7 +395,7 @@ def rodape():
             "Phe - Phoenix\n"
             "Pic - Pictor\n"
             "PsA - Pisces Austrinus\n",
-            va="center", ha='left')
+            va="center", ha='left', fontsize=fonte_do_texto)
     ax.text(0.8250, 0.5,
             "Psc - Pisces\n"
             "Pup - Puppis\n"
@@ -399,22 +419,30 @@ def rodape():
             "Vir - Virgo\n"
             "Vol - Volans\n"
             "Vul - Vulpecula\n",
-            va="center", ha='left')
+            va="center", ha='left', fontsize=fonte_do_texto)
 
 ###############################################################################
-    ax = fig.add_subplot(gs[linha_do_rodape:, 7:])
+    ax = fig.add_subplot(gs[linha_do_rodape:, 12:])
     #creditos = "GNU Public License 3.0\n© 2020 Wandeclayt Melo"
     ax.axis('off')
-    line0 = "Copyright © 2021 Wandeclayt Melo/\n"
+    line0 = "Copyright © 2023 Wandeclayt Melo/\n"
     line1 = "Natália Palivanas.\n"
     line2 = "GNU General Public License 3.0\n\n"
-    line3 = "www.ceuprofundo.com\n twitter: @ceuprofundo\n\n"
-    line4 = "Generated with Python 3.7.6 and Matplotlib 3.2.1\n"
-    line5 = "www.github.com/masterhit/CeuProfundo"
+    line3 = "www.ceuprofundo.com\n twitter/instagram: @ceuprofundo\n\n"
+    line4 = "Generated with\n"
+    line5 = " Python 3.9 and Matplotlib 3.2.1\n"
+    line6 = "www.github.com/masterhit/CeuProfundo"
 
-    ax.text(0.5, 0.5, line0 + line1 + line2 + line3 + line4 + line5,
-            va="center", ha='center')
+    ax.text(0.48, 0.6, line0 + line1 + line2 + line3 + line4 + line5 + line6,
+            va="center", ha='center', fontsize=fonte_do_texto+2)
 
+
+    #Regua
+    #ax = fig.add_subplot(gs[linha_do_rodape+2:, 10:16])
+    ##ax = fig.add_subplot(gs[5:, 0:1])
+    #regua = plt.imread('AssinaturaCarta.png')
+    #ax.imshow(regua)
+    #ax.axis('off')
 
 """
     ax = fig.add_subplot(gs[linha_do_rodape, 2:3])
@@ -443,8 +471,8 @@ def rodape():
 
 #Parametros das Linhas
 
-largura_da_linha = 2
-alfa_linha = 0.4
+largura_da_linha = 1.2 #v0.8.0 (largura_da_linha = 2)
+alfa_linha = 0.8 #v0.8.0 (alfa_linha = 0.4)
 
 
 def Line(StarA, StarB):
@@ -510,13 +538,13 @@ def Coordenadas(RA, DEC):
 # ROTULOS DAS CONSTELACOES
 def Const_Label(Const, RA, DEC):
     plt.annotate(Const, xy=Coordenadas(RA, DEC),
-                 color='gray', alpha=0.8, fontsize='medium')
+                 color='gray', alpha=0.8, fontsize=fonte_constelacao)
 
 
 # ROTULOS DAS ESTRELAS
 def Star_Label(Star, RA, DEC):
     plt.annotate(Star, xy=(Coordenadas(RA, DEC)),
-                 color='gray', alpha=0.8, fontsize='medium')
+                 color='gray', alpha=0.8, fontsize=fonte_do_texto)
 
 
 """
@@ -710,7 +738,7 @@ def Aries():
     Line(AlphaArietis, BetaArietis)
     Line(BetaArietis, GammaArietis)
 
-    Const_Label('Ari', 2, 20)
+    Const_Label('Ari', 2.25, 19)
     Star_Label(r'$\alpha$', 2.12, 23.46)
     Star_Label(r'$\beta$', 1.91, 20.81)
     Star_Label(r'$\gamma$', 1.89, 19.29)
@@ -731,7 +759,7 @@ def Aur():
     Line(EtaAur, IotaAur)
     Line(IotaAur, BetaTauri)
 
-    Const_Label('Aur', 5.5, 43)
+    Const_Label('Aur', 5.5, 35)
     Star_Label(r'$\alpha$', 5.278167, 45.998056)
     Star_Label(r'$\beta$', 5.992139, 44.947500)
     Star_Label(r'$\eta$', 5.108583, 41.234444)
@@ -759,7 +787,7 @@ def Bootes():
     Line(BetaBootis, DeltaBootis)
     Line(DeltaBootis, EpsilonBootis)
 
-    Const_Label('Boo', 14.85, 32)
+    Const_Label('Boo', 14.66, 35)
     Star_Label(r'$\alpha$', 14.2, 17.5)
     Star_Label(r'$\beta$', 15.032444, 40.390556)
     Star_Label(r'$\gamma$', 14.534639, 38.308333)
@@ -1013,7 +1041,7 @@ def Cep():
     Line(_32IotCep, _8BetCep)
     Line(_21ZetCep, _5AlpCep)
 
-    Const_Label('Cep', 22.16, 65)
+    Const_Label('Cep', 22.2, 67)
     Star_Label(r'$\alpha$', 21.3, 61.5)
     Star_Label(r'$\beta$', 21.29, 71.5)
     Star_Label(r'$\gamma$', 23.65577778, 77.6325)
@@ -1040,7 +1068,12 @@ def Cet():
     Line(_45TheCet, _68OmiCet)
     Line(_68OmiCet, Coordenadas(2.658055556, 0))
 
-    Const_Label('Cet', 1.5, 12)
+
+    if retangular:
+        Const_Label('Cet', 1.5, -10)
+    else:
+        Const_Label('Cet', 1.5, 12)
+    #Const_Label('Cet', 1.5, 12)
     Star_Label(r'$o$', 2.34, -3.5)
     Star_Label(r'$\beta$', 0.72, -18.1)
     Star_Label(r'$\zeta$', 1.857666667, -10.335)
@@ -1065,7 +1098,10 @@ def CetNorth():
     Line(_87MuCet, _73Xi2Cet)
     Line(_73Xi2Cet, _86GamCet)
 
-    Const_Label('Cet', 2.7, 7)
+    if retangular:
+        Const_Label('Cet', 1.5, -10)
+    else:
+        Const_Label('Cet', 2.7, 7)
     Star_Label(r'$\alpha$', 3.07, 3.8)
 
 
@@ -1112,7 +1148,7 @@ def Cancer():
     Line(DeltaCancri, GammaCancri)
     Line(GammaCancri, IotaCancri)
 
-    Const_Label('Cnc', 8.66, 17)
+    Const_Label('Cnc', 8.60, 12)
     Star_Label(r'$\alpha$', 8.974778, 11.857778)
     Star_Label(r'$\beta$', 8.275250, 9.185556)
     Star_Label(r'$\gamma$', 8.721417, 21.468611)
@@ -1273,7 +1309,7 @@ def Cru():
     Line(BetaCrucis, DeltaCrucis)
 
     Const_Label('Cru', 12.5, -61)
-    Star_Label(r'$\alpha$', 12.55, -63.1)
+    Star_Label(r'$\alpha$', 12.4, -63.1)
     Star_Label(r'$\beta$', 12.8, -58.5)
     Star_Label(r'$\gamma$', 12.52, -55.5)
     Star_Label(r'$\delta$', 12.1, -58.65)
@@ -1616,7 +1652,7 @@ def Gem():
     Line(_55DelGem, _54LamGem)
     Line(_54LamGem, _31XiGem)
 
-    Const_Label('Gem', 7.16, 28)
+    Const_Label('Gem', 7.12, 22)
     Star_Label(r'$\alpha$', 7.6, 33)
     Star_Label(r'$\beta$', 7.83, 27.5)
     Star_Label(r'$\gamma$', 6.628527778, 16.39916667)
@@ -2560,7 +2596,7 @@ def Psc():
     Line(_83TauPsc, _90UpsPsc)
     Line(_90UpsPsc, _85PhiPsc)
 
-    Const_Label('Psc', 0, 5)
+    Const_Label('Psc', 1, 10)
     Star_Label(r'$\eta$', 1.5247222219999998, 15.34583333)
     Star_Label(r'$\gamma$', 23.28608333, 3.2822222219999997)
     Star_Label(r'$\omega$', 23.98852778, 6.863333333)
@@ -2645,7 +2681,7 @@ def Scl():
     Line(_DelScl, _GamScl)
     Line(_GamScl, _BetScl)
 
-    Const_Label('Scl', 0, -31)
+    Const_Label('Scl', 0.5, -31)
     Star_Label(r'$\alpha$', 1, -28.5)
     Star_Label(r'$\beta$', 23.5, -38)
 
@@ -3043,7 +3079,7 @@ def UMi():
     Line(GammaUMi, BetaUMi)
     Line(BetaUMi, ZetaUMi)
 
-    Const_Label('UMi', 15.66, 78)
+    Const_Label('UMi', 15.66, 82)
     Star_Label(r'$\alpha$', 6, 89)
     Star_Label(r'$\beta$', 14.85, 75)
     Star_Label(r'$\gamma$', 15.5, 71)
@@ -3680,7 +3716,7 @@ if retangular:
                      )
 
     linhas_do_grid = 10
-    colunas_do_grid = 8
+    colunas_do_grid = 16
     gs = GridSpec(linhas_do_grid, colunas_do_grid, figure=fig)
     ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 0:])
 
@@ -3860,19 +3896,19 @@ if polar_norte:
 """
 
 if polar_duplo:
-
-    r = np.arange(0, 90, 1) #declinacao de 0 a 90, passos de 1 grau
+    r = np.arange(0, 90, 1) # declinacao de 0 a 90, passos de 1 grau
     theta = 2 * np.pi * r
     fig = plt.figure(figsize=(1.5 * plot_size, plot_size),
                      dpi=plot_dpi,
                      constrained_layout=True)
-    linhas_do_grid = 10
-    gs = GridSpec(linhas_do_grid, 8, figure=fig)
+    linhas_do_grid = 11
+    colunas_do_grid = 16
+    gs = GridSpec(linhas_do_grid, colunas_do_grid, figure=fig)
 
 
 #################NORTE
-    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 0:4], projection='polar')
-    ax.set_theta_zero_location('N')
+    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 8:], projection='polar')
+    ax.set_theta_zero_location('S')
     ax.set_theta_direction(-1)
 
     if stars:
@@ -3903,8 +3939,8 @@ if polar_duplo:
     # plt.plot(RA*2*np.pi/24, 23.5*np.sin(RA*2*np.pi/24))
 #################SUL
 
-    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 4:], projection='polar')
-    ax.set_theta_zero_location('N')
+    ax = fig.add_subplot(gs[:(linhas_do_grid - 3), 0:8], projection='polar')
+    ax.set_theta_zero_location('S')
     ax.set_theta_direction(1)
 
     if stars:
@@ -3935,6 +3971,7 @@ if polar_duplo:
 
 ###############################################################################
 #PERFUMARIA - RODAPE
+    header()
     rodape()
 
 ###############################################################################
