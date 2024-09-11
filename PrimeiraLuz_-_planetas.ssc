@@ -1,0 +1,159 @@
+//Primeira Luz - Planetas
+//author: Wandeclayt M./Projeto Ceu Profundo
+//license: CC-BY-NC 4.0
+
+//Inicio
+core.setFlagGravityLabels(true);
+LandscapeMgr.setFlagLandscape(true);
+core.setDiskViewport(true);
+StelMovementMgr.deselection();
+GridLinesMgr.setFlagEclipticLine(false);
+LandscapeMgr.setFlagAtmosphere(true);
+StelMovementMgr.setEquatorialMount(true);
+core.setDate("now");
+var curto = 1;
+var medio = 5;
+var longo = 1;
+var zoomPlaneta = 0.08;
+core.wait(curto);
+core.output("Inicializacao Concluida");
+
+//Olhar para o Zenite/Zoom 180
+StelMovementMgr.lookZenith(3);
+core.output("Zenite");
+core.wait(curto);
+StelMovementMgr.zoomTo(180, 3);
+core.output("All Sky");
+core.wait(longo);
+
+//Habilita Ecliptica
+GridLinesMgr.setFlagEclipticLine(true);
+core.output("Ecliptica");
+core.wait(longo);
+LandscapeMgr.setFlagAtmosphere(false);
+core.wait(curto);
+
+//Seleciona Sol
+core.moveToObject("Sun", 3);
+core.output("Sol");
+core.wait(curto);
+StelMovementMgr.zoomTo(5, 3);
+core.wait(medio);
+
+//Desabilita Cenario
+LandscapeMgr.setFlagLandscape(false);
+core.output("Cenario desligado");
+
+//Tour Planetas
+var planets = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+
+for (i=0; i<planets.length; i++)
+{
+	objName = planets[i];
+	core.selectObjectByName(objName);
+       core.output(objName);
+	StelMovementMgr.autoZoomIn(3);
+	core.wait(5);
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(5);
+}
+
+//Fases Venus
+var planet = "Venus"
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+core.output("Fases de Venus");
+core.moveToObject(planet , 3);
+core.selectObjectByName(planet)
+StelMovementMgr.autoZoomIn(3);
+core.output(planet );
+core.wait(curto);
+StelMovementMgr.zoomTo(zoomPlaneta, 3);
+//core.wait(longo);
+LandscapeMgr.setFlagLandscape(false);
+for (i=0; i<365; i++)
+{
+    var data = core.getDate()
+    core.output(data)
+    core.setDate("data +1days");
+    core.wait(0.02);
+}
+core.setTimeRate(0);
+
+//Reset
+StelMovementMgr.deselection();
+StelMovementMgr.lookZenith();
+StelMovementMgr.zoomTo(180, 3);
+core.wait(curto);
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+core.setDate("now");
+core.wait(longo);
+
+//Marte
+core.setDate("now")
+var planet = "Mars"
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+core.output(planet);
+core.moveToObject(planet , 3);
+core.selectObjectByName(planet)
+StelMovementMgr.autoZoomIn(3);
+core.output(planet);
+core.wait(curto);
+StelMovementMgr.zoomTo(zoomPlaneta, 3);
+//core.wait(longo);
+for (i=0; i<730; i++)
+{
+    var data = core.getDate()
+    core.output(data)
+    core.setDate("data +1days");
+    core.wait(0.02);
+}
+//core.wait(longo);
+
+//Jupiter
+var planet = "Jupiter"
+core.setDate("now")
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+core.output(planet);
+core.moveToObject(planet , 3);
+core.selectObjectByName(planet)
+StelMovementMgr.autoZoomIn(3);
+core.output(planet);
+core.wait(curto);
+StelMovementMgr.zoomTo(zoomPlaneta, 3);
+//core.wait(longo);
+for (i=0; i<360; i++)
+{
+    var data = core.getDate()
+    core.output(data)
+    core.setDate("data +0.2hours");
+    core.wait(0.02);
+}
+//core.wait(longo);
+
+//Saturn
+var planet = "Saturn"
+core.setDate("now")
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+core.output(planet);
+core.moveToObject(planet , 3);
+core.selectObjectByName(planet)
+StelMovementMgr.autoZoomIn(3);
+core.output(planet);
+core.wait(curto);
+StelMovementMgr.zoomTo(zoomPlaneta, 3);
+//core.wait(longo);
+for (i=0; i<360; i++)
+{
+    var data = core.getDate()
+    core.output(data)
+    core.setDate("data +2 days");
+    core.wait(0.02);
+}
+//core.wait(longo);
+
+GridLinesMgr.setFlagEclipticLine(false);
